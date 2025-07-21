@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: "Alte Haas Grotesk";
+  src: url("/AlteHaasGroteskRegular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alte Haas Grotesk";
+  src: url("/AlteHaasGroteskBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  font-family: "Alte Haas Grotesk", monospace;
+}
+
+.leaflet-container {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 10;
+}
