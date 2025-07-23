@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { useEffect } from "react";
+import { Icon } from "leaflet";
 
 type IPMapProps = {
   lat: number;
@@ -20,6 +21,13 @@ function MapUpdater({ lat, lon }: { lat: number; lon: number }) {
   return null;
 }
 
+const customIcon = new Icon({
+  iconUrl: "./navigation-pin.png",
+  iconSize: [75, 75],
+  iconAnchor: [40, 80],
+  popupAnchor: [-3, -76],
+});
+
 export default function IPMap({
   lat,
   lon,
@@ -38,7 +46,7 @@ export default function IPMap({
           '/{z}/{x}/{y}{r}.png"'
         }
       />
-      <Marker position={[lat, lon]}>
+      <Marker position={[lat, lon]} icon={customIcon}>
         <Popup>
           {ip} <br /> {city}, {country}
         </Popup>

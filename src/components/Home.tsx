@@ -43,7 +43,7 @@ export default function Home() {
       const updatedHistory = [
         inputValue,
         ...searchHistory.filter((item) => item !== inputValue),
-      ].slice(0, 5);
+      ].slice(0, 4);
       setSearchHistory(updatedHistory);
       localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
     }
@@ -130,34 +130,41 @@ export default function Home() {
   }
 
   return (
-    <div
-      className={`min-h-screen z-50 bg-gradient-to-br flex flex-col items-center justify-center p-4 ${isDark ? "from-gray-900 to-gray-800" : "from-blue-100 to-purple-200"}`}
-    >
-      <div
-        className={`w-full z-50 max-w-xl rounded-2xl shadow-lg p-8 flex flex-col gap-6 ${isDark ? "bg-gray-900" : "bg-white"}`}
-      >
-        <h1
-          className={`text-3xl font-bold text-center mb-2 ${isDark ? "text-gray-100" : "text-gray-800"}`}
-        >
+    <div className="z-50 flex min-h-screen flex-col items-end justify-start bg-gradient-to-br from-blue-100 to-purple-200 text-slate-900 dark:text-slate-100">
+      <div className="z-50 m-6 flex w-full max-w-xl flex-col gap-6 rounded-2xl border border-neutral-300 bg-neutral-200/10 bg-clip-padding p-8 shadow-lg backdrop-blur-lg backdrop-filter dark:border-neutral-700">
+        <h1 className="mb-2 text-center text-3xl font-bold">
           IP Address Tracker
         </h1>
         <form className="flex gap-2" action="." onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Search for any IP address or domain"
-            className={`flex-1 px-4 py-2 rounded-l-lg border focus:outline-none focus:ring-2 focus:ring-orange-400 ${isDark ? "border-gray-700 bg-gray-800 text-gray-100" : "border-gray-300 text-gray-700"}`}
+            className="flex-1 rounded-l-lg border border-neutral-300 px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none dark:border-neutral-700"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
           <button
             type="submit"
-            className="bg-orange-400 hover:bg-orange-500 text-white px-6 py-2 rounded-r-lg font-semibold transition-colors"
+            className="cursor-pointer rounded-r-lg bg-orange-400 px-6 py-2 text-slate-100 transition-colors duration-300 ease-in-out hover:bg-orange-500"
           >
-            Search
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
+                fill="currentColor"
+                fillRule="evenodd"
+                clipRule="evenodd"
+              ></path>
+            </svg>
           </button>
 
           <button
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition-all duration-300 bg-transparent ease-in-out hover:bg-gray-200"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-transparent transition-all duration-300 ease-in-out hover:bg-gray-200"
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
@@ -205,11 +212,11 @@ export default function Home() {
           </button>
         </form>
         {searchHistory.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
+          <div className="mt-2 flex flex-wrap justify-center gap-2">
             {searchHistory.map((item, idx) => (
               <button
                 key={item + idx}
-                className={`px-3 py-1 rounded-full text-sm transition-colors ${isDark ? "bg-gray-800 text-gray-200 hover:bg-orange-900" : "bg-gray-200 text-gray-700 hover:bg-orange-100"}`}
+                className="cursor-pointer rounded-full bg-orange-400 px-3 py-1 text-sm text-slate-100 transition-colors duration-300 ease-in-out hover:bg-orange-500"
                 onClick={() => {
                   setInputValue(item);
                   getData(item);
@@ -220,51 +227,51 @@ export default function Home() {
             ))}
           </div>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
           <div className="flex flex-col items-center md:items-start">
             <span
-              className={`text-xs uppercase tracking-wide ${isDark ? "text-gray-400" : "text-gray-400"}`}
+              className={`text-xs tracking-wide uppercase ${isDark ? "text-gray-400" : "text-gray-400"}`}
             >
               IP Address
             </span>
             <span
-              className={`text-lg font-medium mt-1 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+              className={`mt-1 text-lg font-medium ${isDark ? "text-gray-100" : "text-gray-800"}`}
             >
               {IPData.ip}
             </span>
           </div>
           <div className="flex flex-col items-center md:items-start">
             <span
-              className={`text-xs uppercase tracking-wide ${isDark ? "text-gray-400" : "text-gray-400"}`}
+              className={`text-xs tracking-wide uppercase ${isDark ? "text-gray-400" : "text-gray-400"}`}
             >
               Location
             </span>
             <span
-              className={`text-lg font-medium mt-1 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+              className={`mt-1 text-lg font-medium ${isDark ? "text-gray-100" : "text-gray-800"}`}
             >
               {IPData.city + ", " + IPData.country}
             </span>
           </div>
           <div className="flex flex-col items-center md:items-start">
             <span
-              className={`text-xs uppercase tracking-wide ${isDark ? "text-gray-400" : "text-gray-400"}`}
+              className={`text-xs tracking-wide uppercase ${isDark ? "text-gray-400" : "text-gray-400"}`}
             >
               ZIP
             </span>
             <span
-              className={`text-lg font-medium mt-1 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+              className={`mt-1 text-lg font-medium ${isDark ? "text-gray-100" : "text-gray-800"}`}
             >
               {IPData.zip}
             </span>
           </div>
           <div className="flex flex-col items-center md:items-start">
             <span
-              className={`text-xs uppercase tracking-wide ${isDark ? "text-gray-400" : "text-gray-400"}`}
+              className={`text-xs tracking-wide uppercase ${isDark ? "text-gray-400" : "text-gray-400"}`}
             >
               ISP
             </span>
             <span
-              className={`text-lg font-medium mt-1 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+              className={`mt-1 text-lg font-medium ${isDark ? "text-gray-100" : "text-gray-800"}`}
             >
               {IPData.isp}
             </span>
