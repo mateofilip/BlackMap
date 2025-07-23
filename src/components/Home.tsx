@@ -1,8 +1,8 @@
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
 import { Toaster, toast } from "sonner";
-const apiKey = (await import.meta.env.PUBLIC_API_KEY) as string;
+import IPMap from "./IPMap.tsx";
 
 type IP = {
   ip: string;
@@ -28,24 +28,56 @@ export default function Home() {
   const [isDark, setIsDark] = useState(
     document.body.classList.contains("dark"),
   );
+  const [searchHistory, setSearchHistory] = useState<string[]>(() => {
+    const saved = localStorage.getItem("searchHistory");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (inputValue && !isValidInput(inputValue)) {
+      toast.warning("Please enter a valid IP address or domain name.");
+      return;
+    }
+    if (inputValue) {
+      const updatedHistory = [
+        inputValue,
+        ...searchHistory.filter((item) => item !== inputValue),
+      ].slice(0, 5);
+      setSearchHistory(updatedHistory);
+      localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
+    }
     getData(inputValue);
     setInputValue("");
   };
+
+  // Input validation for IP or domain
+  function isValidInput(input: string): boolean {
+    // IPv4 regex
+    const ipv4 = /^(?:\d{1,3}\.){3}\d{1,3}$/;
+    // IPv6 regex (simple)
+    const ipv6 = /^([\da-fA-F]{0,4}:){2,7}[\da-fA-F]{0,4}$/;
+    // Domain regex (simple)
+    const domain = /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.[A-Za-z]{2,}$/;
+    return ipv4.test(input) || ipv6.test(input) || domain.test(input);
+  }
 
   async function getData(input: string) {
     const ipParam = input ? input : "";
     try {
       const response = await fetch(`http://ip-api.com/json/${ipParam}`);
       if (!response.ok) {
-        toast.error(
-          "The IP address couldn't be found, make sure it's written properly!",
-        );
-        throw new Error(`Response status: ${response.status}`);
+        toast.error("Network error: Unable to reach the IP API service.");
+        return;
       }
       const data = await response.json();
+
+      if (data.status === "fail") {
+        toast.warning(
+          "The IP address or domain couldn't be found, make sure it's written properly!",
+        );
+        return;
+      }
 
       setIPData({
         ip: data.query,
@@ -58,7 +90,7 @@ export default function Home() {
       });
     } catch (error) {
       toast.error(
-        "The IP address couldn't be found, make sure it's written properly!",
+        "A network error occurred. Please check your internet connection and try again.",
       );
     }
   }
@@ -86,17 +118,34 @@ export default function Home() {
     document.body.classList.toggle("dark");
   };
 
+  // Add MapUpdater component
+  function MapUpdater({ lat, lon }: { lat: number; lon: number }) {
+    const map = useMap();
+    useEffect(() => {
+      if (lat !== 0 && lon !== 0) {
+        map.setView([lat, lon], map.getZoom(), { animate: true });
+      }
+    }, [lat, lon]);
+    return null;
+  }
+
   return (
-    <div className="min-h-screen z-50 bg-gradient-to-br from-blue-100 to-purple-200 flex flex-col items-center justify-center p-4">
-      <div className="w-full z-50 max-w-xl bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-6">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
+    <div
+      className={`min-h-screen z-50 bg-gradient-to-br flex flex-col items-center justify-center p-4 ${isDark ? "from-gray-900 to-gray-800" : "from-blue-100 to-purple-200"}`}
+    >
+      <div
+        className={`w-full z-50 max-w-xl rounded-2xl shadow-lg p-8 flex flex-col gap-6 ${isDark ? "bg-gray-900" : "bg-white"}`}
+      >
+        <h1
+          className={`text-3xl font-bold text-center mb-2 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+        >
           IP Address Tracker
         </h1>
         <form className="flex gap-2" action="." onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Search for any IP address or domain"
-            className="flex-1 px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 text-gray-700"
+            className={`flex-1 px-4 py-2 rounded-l-lg border focus:outline-none focus:ring-2 focus:ring-orange-400 ${isDark ? "border-gray-700 bg-gray-800 text-gray-100" : "border-gray-300 text-gray-700"}`}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
@@ -155,36 +204,68 @@ export default function Home() {
             </div>
           </button>
         </form>
+        {searchHistory.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {searchHistory.map((item, idx) => (
+              <button
+                key={item + idx}
+                className={`px-3 py-1 rounded-full text-sm transition-colors ${isDark ? "bg-gray-800 text-gray-200 hover:bg-orange-900" : "bg-gray-200 text-gray-700 hover:bg-orange-100"}`}
+                onClick={() => {
+                  setInputValue(item);
+                  getData(item);
+                }}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
           <div className="flex flex-col items-center md:items-start">
-            <span className="text-xs text-gray-400 uppercase tracking-wide">
+            <span
+              className={`text-xs uppercase tracking-wide ${isDark ? "text-gray-400" : "text-gray-400"}`}
+            >
               IP Address
             </span>
-            <span className="text-lg font-medium text-gray-800 mt-1">
+            <span
+              className={`text-lg font-medium mt-1 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+            >
               {IPData.ip}
             </span>
           </div>
           <div className="flex flex-col items-center md:items-start">
-            <span className="text-xs text-gray-400 uppercase tracking-wide">
+            <span
+              className={`text-xs uppercase tracking-wide ${isDark ? "text-gray-400" : "text-gray-400"}`}
+            >
               Location
             </span>
-            <span className="text-lg font-medium text-gray-800 mt-1">
+            <span
+              className={`text-lg font-medium mt-1 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+            >
               {IPData.city + ", " + IPData.country}
             </span>
           </div>
           <div className="flex flex-col items-center md:items-start">
-            <span className="text-xs text-gray-400 uppercase tracking-wide">
+            <span
+              className={`text-xs uppercase tracking-wide ${isDark ? "text-gray-400" : "text-gray-400"}`}
+            >
               ZIP
             </span>
-            <span className="text-lg font-medium text-gray-800 mt-1">
+            <span
+              className={`text-lg font-medium mt-1 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+            >
               {IPData.zip}
             </span>
           </div>
           <div className="flex flex-col items-center md:items-start">
-            <span className="text-xs text-gray-400 uppercase tracking-wide">
+            <span
+              className={`text-xs uppercase tracking-wide ${isDark ? "text-gray-400" : "text-gray-400"}`}
+            >
               ISP
             </span>
-            <span className="text-lg font-medium text-gray-800 mt-1">
+            <span
+              className={`text-lg font-medium mt-1 ${isDark ? "text-gray-100" : "text-gray-800"}`}
+            >
               {IPData.isp}
             </span>
           </div>
@@ -192,18 +273,17 @@ export default function Home() {
       </div>
 
       {IPData.lat !== 0 && IPData.lon !== 0 && (
-        <MapContainer center={[IPData.lat, IPData.lon]} zoom={13}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            // url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-            url={
-              "https://{s}.basemaps.cartocdn.com/rastertiles/" +
-              (isDark ? "dark_all" : "voyager") +
-              '/{z}/{x}/{y}{r}.png"'
-            }
-          />
-        </MapContainer>
+        <IPMap
+          lat={IPData.lat}
+          lon={IPData.lon}
+          isDark={isDark}
+          ip={IPData.ip}
+          city={IPData.city}
+          country={IPData.country}
+        />
       )}
+
+      <Toaster richColors closeButton />
     </div>
   );
 }
