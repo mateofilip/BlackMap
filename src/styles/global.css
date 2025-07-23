@@ -18,8 +18,16 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("/InterVariable.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
-  font-family: "Alte Haas Grotesk", monospace;
+  font-family: "Inter", monospace;
 }
 
 .leaflet-container {
