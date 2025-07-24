@@ -19,15 +19,23 @@
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/InterVariable.ttf") format("truetype");
+  font-family: "TeX Gyre Heros";
+  src: url("/texgyreheros-regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
+@font-face {
+  font-family: "TeX Gyre Heros";
+  src: url("/texgyreheros-bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
-  font-family: "Alte Haas Grotesk", monospace;
+  font-family: "TeX Gyre Heros", monospace;
 }
 
 .leaflet-container {

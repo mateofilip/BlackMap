@@ -137,35 +137,8 @@ export default function Home() {
             IP Address Tracker
           </h1>
           <form className="flex gap-2" action="." onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Search for any IP address or domain"
-              className="flex-1 rounded-l-lg border border-neutral-300 px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none dark:border-neutral-700"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
             <button
-              type="submit"
-              className="cursor-pointer rounded-r-lg bg-orange-400 px-6 py-2 text-slate-100 transition-colors duration-300 ease-in-out hover:bg-orange-500"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </button>
-
-            <button
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-transparent transition-all duration-300 ease-in-out hover:bg-gray-200"
+              className="cursor-pointer rounded-l-lg bg-orange-400 px-6 py-2 text-slate-100 transition-colors duration-300 ease-in-out hover:bg-orange-500"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
@@ -211,13 +184,40 @@ export default function Home() {
                 </svg>
               </div>
             </button>
+
+            <input
+              type="text"
+              placeholder="Search for any IP address or domain"
+              className="flex-1 border border-neutral-300 px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none dark:border-neutral-700"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="cursor-pointer rounded-r-lg bg-orange-400 px-6 py-2 text-slate-100 transition-colors duration-300 ease-in-out hover:bg-orange-500"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </button>
           </form>
           {searchHistory.length > 0 && (
             <div className="mt-2 flex flex-wrap justify-center gap-2">
               {searchHistory.map((item, idx) => (
                 <button
                   key={item + idx}
-                  className="cursor-pointer rounded-full bg-orange-400 px-3 py-1 text-sm text-slate-100 transition-colors duration-300 ease-in-out hover:bg-orange-500"
+                  className="cursor-pointer rounded-full border border-neutral-300 px-3 py-1 text-sm text-gray-400 transition-colors duration-300 ease-in-out hover:border-orange-400 hover:bg-orange-400 hover:text-slate-100"
                   onClick={() => {
                     setInputValue(item);
                     getData(item);
