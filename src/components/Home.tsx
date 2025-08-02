@@ -65,7 +65,9 @@ export default function Home() {
   async function getData(input: string) {
     const ipParam = input ? input : "";
     try {
-      const response = await fetch(`http://ip-api.com/json/${ipParam}`);
+      const response = await fetch(
+        `https://api.ipquery.io/${ipParam}?format=json`,
+      );
       if (!response.ok) {
         toast.error("Network error: Unable to reach the IP API service.");
         return;
@@ -80,13 +82,13 @@ export default function Home() {
       }
 
       setIPData({
-        ip: data.query,
-        country: data.country || "Unknown",
-        city: data.city || "Unknown",
-        zip: data.zip || "Unknown",
-        isp: data.isp || "Unknown",
-        lat: data.lat || 0,
-        lon: data.lon || 0,
+        ip: data.ip,
+        country: data.location.country || "Unknown",
+        city: data.location.city || "Unknown",
+        zip: data.location.zipcode || "Unknown",
+        isp: data.isp.isp || "Unknown",
+        lat: data.location.latitude || 0,
+        lon: data.location.longitude || 0,
       });
     } catch (error) {
       toast.error(
