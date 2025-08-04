@@ -1,22 +1,6 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Alte Haas Grotesk";
-  src: url("/AlteHaasGroteskRegular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Alte Haas Grotesk";
-  src: url("/AlteHaasGroteskBold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "TeX Gyre Heros";
   src: url("/texgyreheros-regular.otf") format("opentype");
   font-weight: normal;
