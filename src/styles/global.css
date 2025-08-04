@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @font-face {
   font-family: "Alte Haas Grotesk";
   src: url("/AlteHaasGroteskRegular.ttf") format("truetype");
@@ -39,8 +37,9 @@ html {
 }
 
 .leaflet-container {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  z-index: 0;
+  @apply absolute z-0 h-dvh w-dvw;
+}
+
+.leaflet-control-zoom {
+  @apply hidden;
 }

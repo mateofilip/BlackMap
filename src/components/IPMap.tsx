@@ -5,7 +5,6 @@ import { Icon } from "leaflet";
 type IPMapProps = {
   lat: number;
   lon: number;
-  isDark: boolean;
   ip: string;
   city: string;
   country: string;
@@ -28,23 +27,12 @@ const customIcon = new Icon({
   popupAnchor: [-3, -76],
 });
 
-export default function IPMap({
-  lat,
-  lon,
-  isDark,
-  ip,
-  city,
-  country,
-}: IPMapProps) {
+export default function IPMap({ lat, lon, ip, city, country }: IPMapProps) {
   return (
     <MapContainer center={[lat, lon]} zoom={13}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url={
-          "https://{s}.basemaps.cartocdn.com/rastertiles/" +
-          (isDark ? "dark_all" : "voyager") +
-          '/{z}/{x}/{y}{r}.png"'
-        }
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png"
       />
       <Marker position={[lat, lon]} icon={customIcon}>
         <Popup>
