@@ -1,52 +1,69 @@
-# Astro Starter Kit: Basics
+# BlackMap
+
+BlackMaps is a sleek and modern IP tracker application designed for users who want quick and visually engaging insights into the location of any IP address. Whether you’re curious about a visitor’s location or auditing network activity, BlackMaps provides accurate geolocation data presented on a beautifully styled dark map.
+
+## Features
+
+- 📌 Enter any valid IP address and retrieve real-time location data within miliseconds
+- 🗺️ A visually appealing, dark-themed map with subtle glassmorphism and orange highlights marks the exact geolocation of the IP
+- 🫆 Get precise information about the IP's location, including city, country, city, ZIP Code and it's internet service provider
+- 📱 Responsive design for all devices
+
+## Screenshots
+
+![BlackMap Screenshot](./public/BlackMap.png)
+
+## Usage
+
+- Input the IP address you want to track in the search field.
+- The app queries a geolocation API (IPQuery) and fetches the related data instantly.
+- The map centers on the IP’s location, and the details panel shows the associated address, city, country, zip code, and ISP.
+- Zoom in/out or pan the map to view the surrounding geography.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm
+
+### Setup
+
+1. Clone the repository:
+   ```sh
+   git clone <repo-url>
+   cd BlackMap
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the development server:
+
+   ```sh
+   npm run dev
+   ```
+
+   The app will be available at `http://localhost:4321`.
+
+### Build for Production
 
 ```sh
-npm create astro@latest -- --template basics
+npm run build
+npm run preview
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### Deployment
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- Deploy easily to Vercel, Netlify, or any static host.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Credits
 
-## 🚀 Project Structure
+- [Astro](https://astro.build/) (with React integration)
+- [React](https://react.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Leaflet](https://leafletjs.com/)
 
-Inside of your Astro project, you'll see the following folders and files:
+---
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+© 2025 BlackMap. Built by Mateo Filip.

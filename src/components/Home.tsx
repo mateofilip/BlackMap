@@ -116,7 +116,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="z-50 flex min-h-dvh flex-col items-center justify-between bg-neutral-800 px-4 text-slate-100">
+      <div className="z-50 flex min-h-dvh flex-col items-center justify-between bg-black px-4 text-slate-100">
         <div className="z-50 m-2 flex w-full max-w-xl scale-90 flex-col gap-6 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-8 shadow-lg backdrop-blur-sm backdrop-filter md:m-6 md:scale-100">
           <h1 className="mb-2 text-center text-3xl font-bold">BlackMap</h1>
           <form className="flex gap-2" action="." onSubmit={handleSubmit}>
