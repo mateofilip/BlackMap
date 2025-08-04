@@ -40,6 +40,7 @@ html {
   @apply absolute z-0 h-dvh w-dvw;
 }
 
-.leaflet-control-zoom {
+.leaflet-control-zoom,
+.leaflet-control-attribution {
   @apply hidden;
 }

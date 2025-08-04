@@ -38,7 +38,7 @@ export default function Home() {
     setIsSearching(true);
 
     if (inputValue && !isValidInput(inputValue)) {
-      toast.warning("Please enter a valid IP address or domain name.");
+      toast.warning("Please enter a valid IP address.");
       setTimeout(() => setIsSearching(false), 500);
       return;
     }
@@ -57,15 +57,13 @@ export default function Home() {
     setInputValue("");
   };
 
-  // Input validation for IP or domain
+  // Input validation for IP
   function isValidInput(input: string): boolean {
     // IPv4 regex
     const ipv4 = /^(?:\d{1,3}\.){3}\d{1,3}$/;
     // IPv6 regex (simple)
     const ipv6 = /^([\da-fA-F]{0,4}:){2,7}[\da-fA-F]{0,4}$/;
-    // Domain regex (simple)
-    const domain = /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.A-Za-z]{2,}$/;
-    return ipv4.test(input) || ipv6.test(input) || domain.test(input);
+    return ipv4.test(input) || ipv6.test(input);
   }
 
   async function getData(input: string) {
@@ -75,14 +73,14 @@ export default function Home() {
         `https://api.ipquery.io/${ipParam}?format=json`,
       );
       if (!response.ok) {
-        toast.error("Network error: Unable to reach the IP API service.");
+        toast.error("Network error: Unable to reach the IPQuery service.");
         return;
       }
       const data = await response.json();
 
       if (data.status === "fail") {
         toast.warning(
-          "The IP address or domain couldn't be found, make sure it's written properly!",
+          "The IP address couldn't be found, make sure it's written properly!",
         );
         return;
       }
@@ -118,8 +116,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="z-50 flex min-h-dvh flex-col items-center justify-between bg-gradient-to-br from-blue-100 to-purple-200 px-4 text-slate-100 md:px-0">
-        <div className="z-50 m-6 flex w-full max-w-xl flex-col gap-6 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-8 shadow-lg backdrop-blur-sm backdrop-filter">
+      <div className="z-50 flex min-h-dvh flex-col items-center justify-between bg-neutral-800 px-4 text-slate-100">
+        <div className="z-50 m-2 flex w-full max-w-xl scale-90 flex-col gap-6 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-8 shadow-lg backdrop-blur-sm backdrop-filter md:m-6 md:scale-100">
           <h1 className="mb-2 text-center text-3xl font-bold">
             IP Address Tracker
           </h1>
@@ -193,13 +191,13 @@ export default function Home() {
         <Toaster richColors closeButton />
 
         <div
-          className={`z-50 m-6 grid w-full max-w-5xl grid-cols-2 grid-rows-2 justify-center gap-4 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-5 text-center shadow-lg backdrop-blur-sm backdrop-filter transition-all duration-500 md:justify-between md:rounded-full md:px-16 ${dataUpdated ? "scale-105 border-orange-400" : ""}`}
+          className={`z-50 m-6 grid w-full max-w-5xl grid-cols-2 grid-rows-2 justify-center gap-4 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-5 text-center shadow-lg backdrop-blur-sm backdrop-filter transition-all duration-500 md:grid-cols-4 md:grid-rows-1 md:justify-between md:rounded-full md:px-16 ${dataUpdated ? "scale-105 border-orange-400" : ""}`}
         >
           <div className="flex flex-col items-center">
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               IP ADDRESS
             </h3>
-            <span className="mt-1 text-xs font-medium text-gray-100 md:text-lg">
+            <span className="mt-1 text-xs font-medium text-gray-100 md:text-base">
               {IPData.ip}
             </span>
           </div>
@@ -207,7 +205,7 @@ export default function Home() {
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               Location
             </h3>
-            <span className="mt-1 text-xs font-medium text-gray-100 md:text-lg">
+            <span className="mt-1 text-xs font-medium text-gray-100 md:text-base">
               {IPData.city + ", " + IPData.country}
             </span>
           </div>
@@ -215,7 +213,7 @@ export default function Home() {
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               ZIP CODE
             </h3>
-            <span className="mt-1 text-xs font-medium text-gray-100 md:text-lg">
+            <span className="mt-1 text-xs font-medium text-gray-100 md:text-base">
               {IPData.zip}
             </span>
           </div>
@@ -223,7 +221,7 @@ export default function Home() {
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               ISP
             </h3>
-            <span className="mt-1 text-xs font-medium text-gray-100 md:text-lg">
+            <span className="mt-1 text-xs font-medium text-gray-100 md:text-base">
               {IPData.isp}
             </span>
           </div>
