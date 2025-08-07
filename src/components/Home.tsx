@@ -195,7 +195,7 @@ export default function Home() {
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               IP ADDRESS
             </h3>
-            <span className="mt-1 text-xs font-medium text-gray-100 md:text-base">
+            <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
               {IPData.ip}
             </span>
           </div>
@@ -203,7 +203,7 @@ export default function Home() {
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               Location
             </h3>
-            <span className="mt-1 text-xs font-medium text-gray-100 md:text-base">
+            <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
               {IPData.city + ", " + IPData.country}
             </span>
           </div>
@@ -211,7 +211,7 @@ export default function Home() {
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               ZIP CODE
             </h3>
-            <span className="mt-1 text-xs font-medium text-gray-100 md:text-base">
+            <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
               {IPData.zip}
             </span>
           </div>
@@ -219,7 +219,7 @@ export default function Home() {
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               ISP
             </h3>
-            <span className="mt-1 text-xs font-medium text-gray-100 md:text-base">
+            <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
               {IPData.isp}
             </span>
           </div>
