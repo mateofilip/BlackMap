@@ -189,7 +189,7 @@ export default function Home() {
         <Toaster richColors closeButton />
 
         <div
-          className={`z-50 m-6 grid w-full max-w-5xl grid-cols-2 grid-rows-2 justify-center gap-4 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-5 text-center shadow-lg backdrop-blur-sm backdrop-filter transition-all duration-500 md:grid-cols-4 md:grid-rows-1 md:justify-between md:rounded-full md:px-16 ${dataUpdated ? "scale-105 border-orange-400" : ""}`}
+          className={`z-50 m-6 grid w-full max-w-5xl grid-cols-2 grid-rows-2 justify-center gap-4 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-5 text-center shadow-lg backdrop-blur-sm backdrop-filter transition-all duration-300 md:grid-cols-4 md:grid-rows-1 md:justify-between md:rounded-full md:px-16 ${dataUpdated ? "scale-105 border-orange-400" : ""}`}
         >
           <div className="flex flex-col items-center">
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
