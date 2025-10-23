@@ -129,7 +129,7 @@ export default function Home() {
             />
             <button
               type="submit"
-              className="group cursor-pointer rounded-r-lg bg-orange-400 px-6 py-2 text-slate-100 transition-colors duration-300 ease-in-out hover:bg-orange-500"
+              className="group cursor-pointer rounded-r-lg bg-orange-400 px-6 py-2 text-slate-100 transition-colors duration-200 ease-out hover:bg-orange-500"
               disabled={isSearching}
             >
               <svg
@@ -138,7 +138,7 @@ export default function Home() {
                 viewBox="0 0 15 15"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className={`transition-all duration-300 ease-in-out ${isSearching ? "scale-125" : "scale-100 group-focus:scale-125"}`}
+                className={`transition-all duration-200 ease-out ${isSearching ? "scale-125" : "scale-100 group-focus:scale-125"}`}
               >
                 <path
                   d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
@@ -164,7 +164,7 @@ export default function Home() {
                 {searchHistory.map((item, idx) => (
                   <button
                     key={item + idx}
-                    className="cursor-pointer rounded-full border border-neutral-700 px-3 py-1 text-sm text-gray-400 transition-colors duration-300 ease-in-out hover:border-orange-400 hover:bg-orange-400 hover:text-slate-100"
+                    className="cursor-pointer rounded-full border border-neutral-700 px-3 py-1 text-sm text-gray-400 transition-colors duration-200 ease-out hover:border-orange-400 hover:bg-orange-400 hover:text-slate-100"
                     onClick={() => {
                       setInputValue(item);
                       getData(item);
@@ -189,7 +189,7 @@ export default function Home() {
         <Toaster richColors closeButton />
 
         <div
-          className={`z-50 m-6 grid w-full max-w-5xl grid-cols-2 grid-rows-2 justify-center gap-4 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-5 text-center shadow-lg backdrop-blur-sm backdrop-filter transition-all duration-300 md:grid-cols-4 md:grid-rows-1 md:justify-between md:rounded-full md:px-16 ${dataUpdated ? "scale-105 border-orange-400" : ""}`}
+          className={`z-50 m-6 grid w-full max-w-5xl grid-cols-2 grid-rows-2 justify-center gap-4 rounded-2xl border border-neutral-700 bg-neutral-400/10 bg-clip-padding p-5 text-center shadow-lg backdrop-blur-sm backdrop-filter transition-all duration-200 md:grid-cols-4 md:grid-rows-1 md:justify-between md:rounded-full md:px-16 ${dataUpdated ? "scale-105 border-orange-400" : ""}`}
         >
           <div className="flex flex-col items-center">
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
