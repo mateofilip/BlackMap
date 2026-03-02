@@ -3,6 +3,7 @@ import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
 import { Toaster, toast } from "sonner";
 import IPMap from "./IPMap.tsx";
+import StackInfo from "./StackInfo.tsx";
 
 type IP = {
   ip: string;
@@ -27,6 +28,7 @@ export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [dataUpdated, setDataUpdated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [searchHistory, setSearchHistory] = useState<string[]>(() => {
     const saved = localStorage.getItem("searchHistory");
@@ -67,6 +69,7 @@ export default function Home() {
   }
 
   async function getData(input: string) {
+    setIsLoading(true);
     const ipParam = input ? input : "";
     try {
       const response = await fetch(
@@ -101,6 +104,8 @@ export default function Home() {
       toast.error(
         "A network error occurred. Please check your internet connection and try again.",
       );
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -195,36 +200,53 @@ export default function Home() {
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               IP ADDRESS
             </h3>
-            <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
-              {IPData.ip}
-            </span>
+            {isLoading ? (
+              <div className="mt-1 h-4 w-24 animate-pulse rounded bg-neutral-700/50 md:h-6 md:w-32" />
+            ) : (
+              <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
+                {IPData.ip}
+              </span>
+            )}
           </div>
           <div className="flex flex-col items-center">
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               Location
             </h3>
-            <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
-              {IPData.city + ", " + IPData.country}
-            </span>
+            {isLoading ? (
+              <div className="mt-1 h-4 w-24 animate-pulse rounded bg-neutral-700/50 md:h-6 md:w-32" />
+            ) : (
+              <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
+                {IPData.city + ", " + IPData.country}
+              </span>
+            )}
           </div>
           <div className="flex flex-col items-center">
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               ZIP CODE
             </h3>
-            <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
-              {IPData.zip}
-            </span>
+            {isLoading ? (
+              <div className="mt-1 h-4 w-16 animate-pulse rounded bg-neutral-700/50 md:h-6 md:w-20" />
+            ) : (
+              <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
+                {IPData.zip}
+              </span>
+            )}
           </div>
           <div className="flex flex-col items-center">
             <h3 className="text-xs tracking-wide text-gray-400 uppercase md:text-sm">
               ISP
             </h3>
-            <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
-              {IPData.isp}
-            </span>
+            {isLoading ? (
+              <div className="mt-1 h-4 w-24 animate-pulse rounded bg-neutral-700/50 md:h-6 md:w-32" />
+            ) : (
+              <span className="mt-1 text-xs font-medium wrap-anywhere text-gray-100 md:text-base">
+                {IPData.isp}
+              </span>
+            )}
           </div>
         </div>
       </div>
+      <StackInfo />
     </>
   );
 }
