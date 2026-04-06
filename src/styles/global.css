@@ -17,7 +17,7 @@
 }
 
 html {
-  font-family: "TeX Gyre Heros", monospace;
+  font-family: "TeX Gyre Heros", system-ui, sans-serif;
 }
 
 .leaflet-container {
