@@ -1,4 +1,4 @@
-import { Search, X } from "lucide-react";
+import { Search, X, Clock, Rss } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { useRef, useEffect } from "react";
 
@@ -56,7 +56,7 @@ export default function SearchPanel({
         style={{ willChange: "transform" }}
       >
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+          <Rss className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
           <input
             ref={inputRef}
             type="text"
@@ -76,7 +76,7 @@ export default function SearchPanel({
           disabled={isSearching}
           whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
           transition={{ type: "spring", bounce: 0, duration: 0.2 }}
-          className="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full bg-neutral-800 px-6 text-sm font-medium tracking-wide text-neutral-300 shadow-md transition-colors hover:bg-neutral-700 hover:text-white active:bg-neutral-600 disabled:opacity-60"
+          className="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border border-neutral-700 bg-neutral-800 px-6 text-sm font-medium tracking-wide text-neutral-300 shadow-md transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white active:bg-neutral-600 disabled:opacity-60"
           style={{ willChange: "transform" }}
         >
           <Search className={`h-4 w-4 text-neutral-300 ${isSearching ? "animate-pulse" : ""}`} />
@@ -102,13 +102,16 @@ export default function SearchPanel({
             <div className="p-4">
               <div className="mb-3 flex items-center justify-between px-1">
                 <span className="text-xs font-medium tracking-wide text-neutral-500">Recent</span>
-                <button
+                <motion.button
                   onClick={onClear}
-                  className="flex cursor-pointer items-center gap-1 text-xs font-medium tracking-wide text-neutral-400 hover:text-neutral-200"
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
+                  transition={{ type: "spring", bounce: 0, duration: 0.2 }}
+                  className="inline-flex h-6 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-2.5 text-xs font-medium leading-none tracking-wide text-neutral-400 shadow-sm transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white"
+                  style={{ willChange: "transform" }}
                 >
-                  <X className="h-3 w-3 text-neutral-400" />
+                  <X className="h-3 w-3 shrink-0 translate-y-px text-neutral-400" />
                   Clear
-                </button>
+                </motion.button>
               </div>
               <div className="flex flex-wrap gap-2">
                 {history.map((item, idx) => (
@@ -124,9 +127,12 @@ export default function SearchPanel({
                         ? { duration: 0.15 }
                         : { type: "spring", bounce: 0, duration: 0.2, delay: idx * 0.03 }
                     }
-                    className="cursor-pointer rounded-full border border-neutral-800 bg-neutral-800 px-3 py-1.5 text-xs font-medium tracking-wide text-neutral-300 transition hover:border-neutral-700 hover:bg-neutral-700 hover:text-white"
+                    whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
+                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-xs font-medium tracking-wide text-neutral-300 shadow-sm backdrop-blur-sm transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white"
+                    style={{ willChange: "transform" }}
                     onClick={() => onSelect(item)}
                   >
+                    <Clock className="h-3 w-3 shrink-0 text-neutral-500" />
                     {item}
                   </motion.button>
                 ))}

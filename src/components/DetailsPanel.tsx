@@ -128,9 +128,9 @@ export default function DetailsPanel({
               ? { duration: 0.15 }
               : { type: "spring", bounce: 0, duration: 0.2 }
           }
-          className="flex h-7 w-7 shrink-0 items-center justify-center text-neutral-400"
+          className="flex h-8 w-8 shrink-0 items-center justify-center text-neutral-400"
         >
-          <ChevronDown className="h-3 w-3 text-neutral-400" />
+          <ChevronDown className="h-4 w-4 text-neutral-400" />
         </motion.span>
       </button>
 
