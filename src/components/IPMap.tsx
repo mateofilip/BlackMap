@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { useEffect } from "react";
-import { Icon } from "leaflet";
+import { divIcon } from "leaflet";
 
 type IPMapProps = {
   lat: number;
@@ -20,21 +20,27 @@ function MapUpdater({ lat, lon }: { lat: number; lon: number }) {
   return null;
 }
 
-const customIcon = new Icon({
-  iconUrl: "./navigation-pin.png",
+const customIcon = divIcon({
+  html: `<div class="leaflet-marker-bounce__inner"><img src="/navigation-pin.png" alt="" /></div>`,
+  className: "leaflet-marker-bounce",
   iconSize: [75, 75],
   iconAnchor: [40, 80],
   popupAnchor: [-3, -76],
 });
 
 export default function IPMap({ lat, lon, ip, city, country }: IPMapProps) {
+  const cartoKey = import.meta.env.PUBLIC_CARTO_API_KEY as string | undefined;
+  const tileUrl = cartoKey
+    ? `https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`
+    : "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png";
+
   return (
     <MapContainer center={[lat, lon]} zoom={13}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png"
+        url={tileUrl}
       />
-      <Marker position={[lat, lon]} icon={customIcon}>
+      <Marker key={`${lat}-${lon}`} position={[lat, lon]} icon={customIcon}>
         <Popup>
           {ip} <br /> {city}, {country}
         </Popup>

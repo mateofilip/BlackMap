@@ -116,3 +116,35 @@ html {
     transform: translateY(0);
   }
 }
+
+.leaflet-marker-bounce {
+  background: transparent;
+  border: 0;
+}
+
+.leaflet-marker-bounce__inner {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leaflet-marker-bounce__inner img {
+  width: 75px;
+  height: 75px;
+  transform-origin: 50% 100%;
+  animation: leaflet-marker-float 200ms ease-in-out;
+}
+
+@keyframes leaflet-marker-float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-7px) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
