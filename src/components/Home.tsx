@@ -120,37 +120,34 @@ export default function Home() {
         <IPMap lat={IPData.lat} lon={IPData.lon} ip={IPData.ip} city={IPData.city} country={IPData.country} />
       )}
 
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-        className="absolute top-4 left-4 right-4 z-50 mx-auto max-w-md md:left-auto md:right-6 md:top-6 md:mx-0 md:w-96"
-      >
-        <SearchPanel
-          value={inputValue}
-          onChange={setInputValue}
-          onSubmit={handleSubmit}
-          isSearching={isSearching}
-          history={searchHistory}
-          onSelect={handleSelectHistory}
-          onClear={clearHistory}
-        />
-      </motion.div>
+      <div className="absolute inset-x-4 top-4 z-50 flex flex-col gap-4 md:inset-x-6 md:top-6 md:flex-row md:items-start md:justify-between">
+        <div className="order-2 w-full md:order-1 md:w-80 lg:w-96">
+          <DetailsPanel
+            data={IPData}
+            isLoading={isLoading}
+            isExpanded={isExpanded}
+            onToggle={() => setIsExpanded((v) => !v)}
+            highlight={dataUpdated}
+          />
+        </div>
 
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, x: -16 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        className="absolute bottom-16 left-4 right-4 z-50 mx-auto max-w-md md:bottom-auto md:left-6 md:right-auto md:top-20 md:mx-0 md:w-80 lg:w-96"
-      >
-        <DetailsPanel
-          data={IPData}
-          isLoading={isLoading}
-          isExpanded={isExpanded}
-          onToggle={() => setIsExpanded((v) => !v)}
-          highlight={dataUpdated}
-        />
-      </motion.div>
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+          className="order-1 w-full md:order-2 md:w-96"
+        >
+          <SearchPanel
+            value={inputValue}
+            onChange={setInputValue}
+            onSubmit={handleSubmit}
+            isSearching={isSearching}
+            history={searchHistory}
+            onSelect={handleSelectHistory}
+            onClear={clearHistory}
+          />
+        </motion.div>
+      </div>
 
       <Toaster richColors closeButton />
       <StackInfo />

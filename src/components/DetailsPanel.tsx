@@ -24,30 +24,39 @@ function Row({
   label,
   value,
   isLoading,
-  accent,
 }: {
   icon: React.ElementType;
   label: string;
   value: string;
   isLoading: boolean;
-  accent?: boolean;
 }) {
+  const shouldReduceMotion = useReducedMotion();
   return (
-    <div className={`flex items-center gap-3 px-5 py-4 ${accent ? "bg-white/5" : ""}`}>
-      <span
-        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-white/60 ${accent ? "border-orange-400/20 bg-orange-400/10 text-orange-400" : "border-white/5 bg-white/5"}`}
-      >
-        <Icon className="h-4 w-4" />
-      </span>
+    <div className="flex items-center gap-4 px-6 py-4">
+      <Icon className="h-4 w-4 shrink-0 text-neutral-500" />
       <div className="min-w-0 flex-1">
-        <p className="text-xs font-medium tracking-wide text-white/40 uppercase">{label}</p>
-        {isLoading ? (
-          <div className="mt-1 h-4 w-32 animate-pulse rounded bg-white/10" />
-        ) : (
-          <p className={`mt-1 truncate text-sm font-medium text-white ${label === "Coordinates" ? "font-mono" : ""}`}>
-            {value}
-          </p>
-        )}
+        <p className="text-xs font-medium text-neutral-500">{label}</p>
+        <div className="mt-0.5 overflow-visible">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.p
+              key={isLoading ? "loading" : value}
+              initial={
+                shouldReduceMotion ? { opacity: 0 } : { opacity: 0, filter: "blur(4px)" }
+              }
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, filter: "blur(4px)" }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0.15 }
+                  : { type: "spring", bounce: 0, duration: 0.2 }
+              }
+              className="truncate px-1 -mx-1 py-0.5 -my-0.5 text-sm font-medium leading-relaxed tracking-wide text-neutral-300"
+              style={{ willChange: "filter" }}
+            >
+              {isLoading ? "—" : value}
+            </motion.p>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
@@ -64,45 +73,82 @@ export default function DetailsPanel({
 
   return (
     <motion.div
-      animate={
-        highlight && !shouldReduceMotion
-          ? { scale: 1.02, borderColor: "rgba(251,146,60,0.4)" }
-          : { scale: 1, borderColor: "rgba(255,255,255,0.1)" }
+      initial={false}
+      animate={{
+        scale: highlight && !shouldReduceMotion ? 1.015 : 1,
+        borderColor: highlight && !shouldReduceMotion ? "rgba(161,161,170,0.2)" : "rgba(64,64,64,0.5)",
+      }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0.2 }
+          : { type: "spring", bounce: 0, duration: 0.2 }
       }
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="overflow-hidden rounded-2xl border bg-zinc-900/50 shadow-2xl backdrop-blur-xl"
+      className="overflow-hidden rounded-2xl border bg-neutral-900/40 shadow-lg backdrop-blur-2xl backdrop-saturate-150"
+      style={{ willChange: "transform" }}
     >
       <button
         onClick={onToggle}
-        className="flex w-full cursor-pointer items-center justify-between p-5 text-left transition hover:bg-white/5"
+        className="flex w-full cursor-pointer items-center justify-between gap-4 p-6 text-left"
         aria-expanded={isExpanded}
       >
-        <div>
-          <h1 className="text-lg font-bold tracking-tight text-white">BlackMap</h1>
-          <p className="mt-1 text-xs leading-relaxed text-white/40">
-            {isExpanded ? "Geolocation details" : `${data.ip || "—"} · ${data.city || "Locating"}`}
-          </p>
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl font-bold leading-none tracking-tight text-neutral-200">BlackMap</h1>
+          <div className="mt-2 overflow-visible">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.p
+                key={isExpanded ? "details" : "summary"}
+                initial={
+                  shouldReduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, filter: "blur(4px)", y: 6 }
+                }
+                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                exit={
+                  shouldReduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, filter: "blur(4px)", y: -6 }
+                }
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0.15 }
+                    : { type: "spring", bounce: 0, duration: 0.2 }
+                }
+                className="px-1 -mx-1 py-0.5 -my-0.5 text-xs font-medium leading-relaxed tracking-wide text-neutral-500"
+                style={{ willChange: "filter" }}
+              >
+                {isExpanded ? "Geolocation Details" : `${data.ip || "—"} · ${data.city || "Locating"}`}
+              </motion.p>
+            </AnimatePresence>
+          </div>
         </div>
         <motion.span
           animate={{ rotate: isExpanded ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60"
+          transition={
+            shouldReduceMotion
+              ? { duration: 0.15 }
+              : { type: "spring", bounce: 0, duration: 0.2 }
+          }
+          className="flex h-7 w-7 shrink-0 items-center justify-center text-neutral-400"
         >
-          <ChevronDown className="h-4 w-4" />
+          <ChevronDown className="h-3 w-3 text-neutral-400" />
         </motion.span>
       </button>
 
       <AnimatePresence initial={false}>
         {isExpanded && (
           <motion.div
-            initial={shouldReduceMotion ? false : { height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            initial={shouldReduceMotion ? { height: 0 } : { height: 0 }}
+            animate={{ height: "auto" }}
+            exit={shouldReduceMotion ? { height: 0 } : { height: 0 }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0.15 }
+                : { type: "spring", bounce: 0, duration: 0.2 }
+            }
             className="overflow-hidden"
           >
-            <div className="overflow-hidden">
-              <div className="divide-y divide-white/5 border-t border-white/5">
+            <div>
+              <div>
                 <Row icon={Globe} label="IP Address" value={data.ip} isLoading={isLoading} />
                 <Row
                   icon={MapPin}
@@ -117,13 +163,7 @@ export default function DetailsPanel({
                   label="Coordinates"
                   value={`${data.lat.toFixed(4)}, ${data.lon.toFixed(4)}`}
                   isLoading={isLoading}
-                  accent
                 />
-              </div>
-              <div className="bg-black/20 px-5 py-3">
-                <p className="text-center text-xs leading-relaxed text-white/30">
-                  Tap to collapse · Updates live on search
-                </p>
               </div>
             </div>
           </motion.div>
