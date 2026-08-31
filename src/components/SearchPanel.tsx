@@ -52,7 +52,7 @@ export default function SearchPanel({
             ? { duration: 0.2 }
             : { type: "spring", bounce: 0, duration: 0.4 }
         }
-        className="flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/40 p-1.5 shadow-lg backdrop-blur-2xl backdrop-saturate-150"
+        className="flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/40 p-1.5 shadow-lg shadow-black/30 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150"
         style={{ willChange: "transform" }}
       >
         <div className="relative flex-1">
@@ -62,7 +62,7 @@ export default function SearchPanel({
             type="text"
             placeholder="Search any IP address"
             aria-label="IP address"
-            className="h-10 w-full rounded-full bg-transparent py-2 pr-10 pl-10 text-sm font-medium tracking-wide text-neutral-300 placeholder:text-neutral-500 focus:outline-none"
+            className="h-10 w-full rounded-full bg-transparent py-2 pr-10 pl-10 text-sm font-medium tracking-wide text-neutral-300 placeholder:text-neutral-500 drop-shadow-sm focus:outline-none"
             value={value}
             onChange={(e) => onChange(e.target.value)}
           />
@@ -97,7 +97,7 @@ export default function SearchPanel({
                 ? { duration: 0.15 }
                 : { type: "spring", bounce: 0, duration: 0.4 }
             }
-            className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 shadow-lg backdrop-blur-2xl backdrop-saturate-150"
+            className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 shadow-lg shadow-black/30 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150"
           >
             <div className="p-4">
               <div className="mb-3 flex items-center justify-between px-1">

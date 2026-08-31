@@ -50,7 +50,7 @@ function Row({
                   ? { duration: 0.15 }
                   : { type: "spring", bounce: 0, duration: 0.2 }
               }
-              className="truncate px-1 -mx-1 py-0.5 -my-0.5 text-sm font-medium leading-relaxed tracking-wide text-neutral-300"
+              className="truncate px-1 -mx-1 py-0.5 -my-0.5 text-sm font-medium leading-relaxed tracking-wide text-neutral-300 drop-shadow-sm"
               style={{ willChange: "filter" }}
             >
               {isLoading ? "—" : value}
@@ -83,7 +83,7 @@ export default function DetailsPanel({
           ? { duration: 0.2 }
           : { type: "spring", bounce: 0, duration: 0.2 }
       }
-      className="overflow-hidden rounded-2xl border bg-neutral-900/40 shadow-lg backdrop-blur-2xl backdrop-saturate-150"
+      className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 shadow-lg shadow-black/30 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150"
       style={{ willChange: "transform" }}
     >
       <button
@@ -92,7 +92,7 @@ export default function DetailsPanel({
         aria-expanded={isExpanded}
       >
         <div className="min-w-0 flex-1">
-          <h1 className="text-xl font-bold leading-none tracking-tight text-neutral-200">BlackMap</h1>
+          <h1 className="text-xl font-bold leading-none tracking-tight text-neutral-200 drop-shadow-sm">BlackMap</h1>
           <div className="mt-2 overflow-visible">
             <AnimatePresence mode="wait" initial={false}>
               <motion.p
@@ -113,7 +113,7 @@ export default function DetailsPanel({
                     ? { duration: 0.15 }
                     : { type: "spring", bounce: 0, duration: 0.2 }
                 }
-                className="px-1 -mx-1 py-0.5 -my-0.5 text-xs font-medium leading-relaxed tracking-wide text-neutral-500"
+                className="px-1 -mx-1 py-0.5 -my-0.5 text-xs font-medium leading-relaxed tracking-wide text-neutral-500 drop-shadow-sm"
                 style={{ willChange: "filter" }}
               >
                 {isExpanded ? "Geolocation Details" : `${data.ip || "—"} · ${data.city || "Locating"}`}
