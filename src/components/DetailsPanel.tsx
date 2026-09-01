@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Globe, MapPin, Hash, Server, Navigation, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
@@ -70,12 +71,22 @@ export default function DetailsPanel({
   highlight,
 }: DetailsPanelProps) {
   const shouldReduceMotion = useReducedMotion();
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(min-width: 1024px)").matches : false,
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)");
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    setIsDesktop(mql.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   return (
     <motion.div
       initial={false}
       animate={{
-        scale: highlight && !shouldReduceMotion ? 1.015 : 1,
         borderColor: highlight && !shouldReduceMotion ? "rgba(161,161,170,0.2)" : "rgba(64,64,64,0.5)",
       }}
       transition={
@@ -83,7 +94,7 @@ export default function DetailsPanel({
           ? { duration: 0.2 }
           : { type: "spring", bounce: 0, duration: 0.2 }
       }
-      className="overflow-hidden rounded-2xl border bg-neutral-900/40 shadow-lg shadow-black/30 ring-1 ring-white/5 backdrop-blur-2xl backdrop-saturate-150"
+      className="w-full overflow-hidden rounded-2xl border bg-neutral-900/40 shadow-lg shadow-black/30 ring-1 ring-white/5 backdrop-blur-2xl backdrop-saturate-150"
       style={{ willChange: "transform" }}
     >
       <button
@@ -122,7 +133,7 @@ export default function DetailsPanel({
           </div>
         </div>
         <motion.span
-          animate={{ rotate: isExpanded ? 180 : 0 }}
+          animate={{ rotate: (isDesktop ? isExpanded : !isExpanded) ? 180 : 0 }}
           transition={
             shouldReduceMotion
               ? { duration: 0.15 }
