@@ -62,7 +62,7 @@ export default function SearchPanel({
             type="text"
             placeholder="Search any IP address"
             aria-label="IP address"
-            className="h-10 w-full rounded-full bg-transparent py-2 pr-10 pl-10 text-sm font-medium tracking-tight text-neutral-300 placeholder:text-neutral-500 drop-shadow-sm focus:outline-none"
+            className="h-10 w-full rounded-full bg-transparent py-2 pr-10 pl-10 text-base font-medium tracking-tight text-neutral-300 placeholder:text-neutral-500 drop-shadow-sm focus:outline-none"
             value={value}
             onChange={(e) => onChange(e.target.value)}
           />
@@ -109,7 +109,7 @@ export default function SearchPanel({
                   className="inline-flex h-6 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-2.5 text-xs font-medium leading-none tracking-tight text-neutral-400 shadow-sm transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-neutral-200"
                   style={{ willChange: "transform" }}
                 >
-                  <X className="h-3 w-3 shrink-0 translate-y-px text-neutral-400" />
+                  <X className="h-3 w-3 shrink-0 text-neutral-400" />
                   Clear
                 </motion.button>
               </div>
