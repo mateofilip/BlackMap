@@ -112,10 +112,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative h-dvh w-dvw overflow-hidden bg-black text-zinc-100 selection:bg-orange-400/30 selection:text-white">
+    <div className="relative h-dvh w-dvw overflow-hidden bg-black text-zinc-100 selection:bg-orange-400/30 selection:text-neutral-200">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 left-1/2 h-96 w-full max-w-2xl -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl" />
-        <div className="absolute top-1/2 -left-32 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
+        <div className="absolute top-1/2 -left-32 h-96 w-96 rounded-full bg-neutral-200/5 blur-3xl" />
       </div>
 
       {IPData.lat !== 0 && IPData.lon !== 0 && (

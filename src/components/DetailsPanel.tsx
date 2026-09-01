@@ -94,7 +94,7 @@ export default function DetailsPanel({
           ? { duration: 0.2 }
           : { type: "spring", bounce: 0, duration: 0.2 }
       }
-      className="w-full overflow-hidden rounded-2xl border bg-neutral-900/40 shadow-lg shadow-black/30 ring-1 ring-white/5 backdrop-blur-2xl backdrop-saturate-150"
+      className="w-full overflow-hidden rounded-2xl border bg-neutral-900/40 shadow-lg shadow-black/30 ring-1 ring-neutral-200/5 backdrop-blur-md backdrop-saturate-150"
       style={{ willChange: "transform" }}
     >
       <button

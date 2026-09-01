@@ -29,7 +29,7 @@ export default function StackInfo() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="animate-in fade-in slide-in-from-bottom-4 fixed right-4 bottom-4 z-[60] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-neutral-800 bg-neutral-900/40 text-neutral-300 shadow-lg shadow-black/30 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150 transition hover:bg-neutral-800 hover:text-white active:scale-95"
+        className="animate-in fade-in slide-in-from-bottom-4 fixed right-4 bottom-4 z-[60] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-neutral-800 bg-neutral-900/40 text-neutral-300 shadow-lg shadow-black/30 ring-1 ring-neutral-200/10 backdrop-blur-md backdrop-saturate-150 transition hover:bg-neutral-800 hover:text-neutral-200 active:scale-95"
         aria-label="View Tech Stack"
         title="View Tech Stack"
       >
@@ -38,14 +38,14 @@ export default function StackInfo() {
 
       {shouldRender && (
         <div
-          className={`fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm duration-200 ${
+          className={`fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4 backdrop-blur-md duration-200 ${
             isOpen ? "animate-in fade-in" : "animate-out fade-out"
           }`}
           onClick={() => setIsOpen(false)}
           onAnimationEnd={onAnimationEnd}
         >
           <div
-            className={`w-full max-w-sm rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 shadow-2xl shadow-black/30 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150 duration-200 ${
+            className={`w-full max-w-sm rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 shadow-2xl shadow-black/30 ring-1 ring-neutral-200/10 backdrop-blur-md backdrop-saturate-150 duration-200 ${
               isOpen ? "animate-in zoom-in-95" : "animate-out zoom-out-95"
             }`}
             onClick={(e) => e.stopPropagation()}
@@ -54,7 +54,7 @@ export default function StackInfo() {
               <h2 className="text-xl font-bold tracking-tight text-neutral-200">Tech Stack</h2>
               <button
                 onClick={() => setIsOpen(false)}
-                className="cursor-pointer rounded-full p-1 text-neutral-400 transition-colors duration-200 hover:bg-white/10 hover:text-white"
+                className="cursor-pointer rounded-full p-1 text-neutral-400 transition-colors duration-200 hover:bg-neutral-200/10 hover:text-neutral-200"
               >
                 <X className="h-5 w-5 text-neutral-400" />
               </button>
