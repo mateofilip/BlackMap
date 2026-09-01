@@ -51,7 +51,7 @@ function Row({
                   ? { duration: 0.15 }
                   : { type: "spring", bounce: 0, duration: 0.2 }
               }
-              className="truncate px-1 -mx-1 py-0.5 -my-0.5 text-sm font-medium leading-relaxed tracking-wide text-neutral-300 drop-shadow-sm"
+              className="truncate px-1 -mx-1 py-0.5 -my-0.5 text-sm font-medium leading-relaxed tracking-tight text-neutral-300 drop-shadow-sm"
               style={{ willChange: "filter" }}
             >
               {isLoading ? "—" : value}
@@ -124,7 +124,7 @@ export default function DetailsPanel({
                     ? { duration: 0.15 }
                     : { type: "spring", bounce: 0, duration: 0.2 }
                 }
-                className="block w-full truncate px-1 -mx-1 py-0.5 -my-0.5 text-xs font-medium leading-relaxed tracking-wide text-neutral-500 drop-shadow-sm"
+                className="block w-full truncate px-1 -mx-1 py-0.5 -my-0.5 text-xs font-medium leading-relaxed tracking-tight text-neutral-500 drop-shadow-sm"
                 style={{ willChange: "filter" }}
               >
                 {isExpanded ? "Geolocation Details" : `${data.ip || "—"} · ${data.city || "Locating"}`}

@@ -65,17 +65,17 @@ export default function StackInfo() {
                   key={item.name}
                   className="flex items-center justify-between rounded-xl border border-neutral-800 bg-neutral-800 px-3 py-3 transition-colors hover:border-neutral-700 hover:bg-neutral-700"
                 >
-                  <span className="font-medium tracking-wide text-neutral-300">
+                  <span className="font-medium tracking-tight text-neutral-300">
                     {item.name}
                   </span>
-                  <span className="rounded-full border border-neutral-700 bg-neutral-900/40 px-2 py-1 text-xs font-medium tracking-wide text-neutral-400">
+                  <span className="rounded-full border border-neutral-700 bg-neutral-900/40 px-2 py-1 text-xs font-medium tracking-tight text-neutral-400">
                     {item.description}
                   </span>
                 </li>
               ))}
             </ul>
             <div className="mt-6 text-center">
-              <p className="text-xs tracking-wide text-neutral-500">Built with ❤️ by Mateo</p>
+              <p className="text-xs tracking-tight text-neutral-500">Built with ❤️ by Mateo</p>
             </div>
           </div>
         </div>

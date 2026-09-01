@@ -62,11 +62,11 @@ export default function SearchPanel({
             type="text"
             placeholder="Search any IP address"
             aria-label="IP address"
-            className="h-10 w-full rounded-full bg-transparent py-2 pr-10 pl-10 text-sm font-medium tracking-wide text-neutral-300 placeholder:text-neutral-500 drop-shadow-sm focus:outline-none"
+            className="h-10 w-full rounded-full bg-transparent py-2 pr-10 pl-10 text-sm font-medium tracking-tight text-neutral-300 placeholder:text-neutral-500 drop-shadow-sm focus:outline-none"
             value={value}
             onChange={(e) => onChange(e.target.value)}
           />
-          <kbd className="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 rounded-md border border-neutral-700 bg-neutral-800 px-1.5 py-1 text-xs font-medium leading-none tracking-wide text-neutral-400 sm:inline-flex">
+          <kbd className="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 rounded-md border border-neutral-700 bg-neutral-800 px-1.5 py-1 text-xs font-medium leading-none tracking-tight text-neutral-400 sm:inline-flex">
             /
           </kbd>
         </div>
@@ -76,7 +76,7 @@ export default function SearchPanel({
           disabled={isSearching}
           whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
           transition={{ type: "spring", bounce: 0, duration: 0.2 }}
-          className="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border border-neutral-700 bg-neutral-800 px-6 text-sm font-medium tracking-wide text-neutral-300 shadow-md transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white active:bg-neutral-600 disabled:opacity-60"
+          className="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border border-neutral-700 bg-neutral-800 px-6 text-sm font-medium tracking-tight text-neutral-300 shadow-md transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white active:bg-neutral-600 disabled:opacity-60"
           style={{ willChange: "transform" }}
         >
           <Search className={`h-4 w-4 text-neutral-300 ${isSearching ? "animate-pulse" : ""}`} />
@@ -101,12 +101,12 @@ export default function SearchPanel({
           >
             <div className="p-4">
               <div className="mb-3 flex items-center justify-between px-1">
-                <span className="text-xs font-medium tracking-wide text-neutral-500">Recent</span>
+                <span className="text-xs font-medium tracking-tight text-neutral-500">Recent</span>
                 <motion.button
                   onClick={onClear}
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
                   transition={{ type: "spring", bounce: 0, duration: 0.2 }}
-                  className="inline-flex h-6 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-2.5 text-xs font-medium leading-none tracking-wide text-neutral-400 shadow-sm transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white"
+                  className="inline-flex h-6 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-2.5 text-xs font-medium leading-none tracking-tight text-neutral-400 shadow-sm transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white"
                   style={{ willChange: "transform" }}
                 >
                   <X className="h-3 w-3 shrink-0 translate-y-px text-neutral-400" />
@@ -128,7 +128,7 @@ export default function SearchPanel({
                         : { type: "spring", bounce: 0, duration: 0.2, delay: idx * 0.03 }
                     }
                     whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
-                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-xs font-medium tracking-wide text-neutral-300 shadow-sm backdrop-blur-sm transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white"
+                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-xs font-medium tracking-tight text-neutral-300 shadow-sm backdrop-blur-sm transition-colors duration-200 hover:border-neutral-600 hover:bg-neutral-700 hover:text-white"
                     style={{ willChange: "transform" }}
                     onClick={() => onSelect(item)}
                   >

@@ -21,7 +21,9 @@ export default function Home() {
   const [isSearching, setIsSearching] = useState(false);
   const [dataUpdated, setDataUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(min-width: 1024px)").matches : true,
+  );
   const shouldReduceMotion = useReducedMotion();
 
   const [searchHistory, setSearchHistory] = useState<string[]>(() => {

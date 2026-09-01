@@ -1,23 +1,16 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "TeX Gyre Heros";
-  src: url("/texgyreheros-regular.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "TeX Gyre Heros";
-  src: url("/texgyreheros-bold.otf") format("opentype");
-  font-weight: bold;
+  font-family: "Geist";
+  src: url("/Geist-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 html {
-  font-family: "TeX Gyre Heros", system-ui, sans-serif;
+  font-family: "Geist", system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
 .leaflet-container {
@@ -134,17 +127,28 @@ html {
   width: 75px;
   height: 75px;
   transform-origin: 50% 100%;
-  animation: leaflet-marker-float 200ms ease-in-out;
+  will-change: transform;
+  animation: leaflet-marker-float 650ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes leaflet-marker-float {
   0% {
     transform: translateY(0) scale(1);
   }
-  50% {
-    transform: translateY(-7px) scale(1.01);
+  30% {
+    transform: translateY(-12px) scale(1.03);
+  }
+  55% {
+    transform: translateY(-3px) scale(0.98);
+  }
+  75% {
+    transform: translateY(-1px) scale(1.005);
   }
   100% {
     transform: translateY(0) scale(1);
   }
 }
+
+/* MapPopup — custom Apple glass, replicates DetailsPanel material via Tailwind.
+   No Leaflet popup overrides needed; MapPopup.tsx handles its own positioning,
+   blur, triangle (clipped container + single rounded tip), and 200ms spring. */
